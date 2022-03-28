@@ -39,16 +39,86 @@ public class TestStudentXMLRepository {
     }
 
     @Test
-    public void save_returnsNull_whenSavingNewValidStudent() {
+    public void save_returnsSavedStudent_whenSavingNewValidStudent_BBT() {
         final Student student = new Student("2", "student name", 933);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertEquals(student, savedStudent);
+    }
+
+    @Test
+    public void save_returnsNull_whenSavingExistingStudent_BBT() {
+        final Student student = new Student("2", "student name", 933);
+        studentXMLRepository.save(student);
         final Student savedStudent = studentXMLRepository.save(student);
         assertNull(savedStudent);
     }
 
     @Test
-    public void save_returnsSavedStudent_whenSavingExistingStudent() {
-        final Student student = new Student("2", "student name", 933);
-        studentXMLRepository.save(student);
+    public void save_returnsNull_whenStudentHasNullId_BBT() {
+        final Student student = new Student(null, "student name", 933);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertNull(savedStudent);
+    }
+
+    @Test
+    public void save_returnsNull_whenStudentHasEmptyId_BBT() {
+        final Student student = new Student("", "student name", 933);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertNull(savedStudent);
+    }
+
+    @Test
+    public void save_returnsNull_whenStudentHasNullName_BBT() {
+        final Student student = new Student("0", null, 933);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertNull(savedStudent);
+    }
+
+    @Test
+    public void save_returnsNull_whenStudentHasEmptyName_BBT() {
+        final Student student = new Student("0", "", 933);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertNull(savedStudent);
+    }
+
+    @Test
+    public void save_returnsNull_whenStudentHasGroupLessThanLowerBound_BBT() {
+        final Student student = new Student("0", "student name", 110);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertNull(savedStudent);
+    }
+
+    @Test
+    public void save_returnsNull_whenStudentHasGroupGreaterThanUpperBound_BBT() {
+        final Student student = new Student("0", "student name", 938);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertNull(savedStudent);
+    }
+
+    @Test
+    public void save_returnsSavedStudent_whenStudentHasGroupEqualToLowerBound_BBT() {
+        final Student student = new Student("0", "student name", 111);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertEquals(student, savedStudent);
+    }
+
+    @Test
+    public void save_returnsSavedStudent_whenStudentHasGroupEqualToUpperBound_BBT() {
+        final Student student = new Student("0", "student name", 937);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertEquals(student, savedStudent);
+    }
+
+    @Test
+    public void save_returnsSavedStudent_whenStudentHasGroupLessThanUpperBound_BBT() {
+        final Student student = new Student("0", "student name", 936);
+        final Student savedStudent = studentXMLRepository.save(student);
+        assertEquals(student, savedStudent);
+    }
+
+    @Test
+    public void save_returnsSavedStudent_whenStudentHasGroupGreaterThanLowerBound_BBT() {
+        final Student student = new Student("0", "student name", 112);
         final Student savedStudent = studentXMLRepository.save(student);
         assertEquals(student, savedStudent);
     }
