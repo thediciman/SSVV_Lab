@@ -1,4 +1,5 @@
 package validation;
+
 import domain.Student;
 
 public class StudentValidator implements Validator<Student> {

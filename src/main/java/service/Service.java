@@ -1,16 +1,21 @@
 package service;
 
-import domain.*;
-import repository.*;
+import domain.Nota;
+import domain.Pair;
+import domain.Student;
+import domain.Tema;
+import repository.NotaXMLRepository;
+import repository.StudentXMLRepository;
+import repository.TemaXMLRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
 
 public class Service {
-    private StudentXMLRepository studentXmlRepo;
-    private TemaXMLRepository temaXmlRepo;
-    private NotaXMLRepository notaXmlRepo;
+    private final StudentXMLRepository studentXmlRepo;
+    private final TemaXMLRepository temaXmlRepo;
+    private final NotaXMLRepository notaXmlRepo;
 
     public Service(StudentXMLRepository studentXmlRepo, TemaXMLRepository temaXmlRepo, NotaXMLRepository notaXmlRepo) {
         this.studentXmlRepo = studentXmlRepo;
@@ -18,11 +23,17 @@ public class Service {
         this.notaXmlRepo = notaXmlRepo;
     }
 
-    public Iterable<Student> findAllStudents() { return studentXmlRepo.findAll(); }
+    public Iterable<Student> findAllStudents() {
+        return studentXmlRepo.findAll();
+    }
 
-    public Iterable<Tema> findAllTeme() { return temaXmlRepo.findAll(); }
+    public Iterable<Tema> findAllTeme() {
+        return temaXmlRepo.findAll();
+    }
 
-    public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
+    public Iterable<Nota> findAllNote() {
+        return notaXmlRepo.findAll();
+    }
 
     public int saveStudent(String id, String nume, int grupa) {
         Student student = new Student(id, nume, grupa);
@@ -47,14 +58,13 @@ public class Service {
     public int saveNota(String idStudent, String idTema, double valNota, int predata, String feedback) {
         if (studentXmlRepo.findOne(idStudent) == null || temaXmlRepo.findOne(idTema) == null) {
             return -1;
-        }
-        else {
+        } else {
             int deadline = temaXmlRepo.findOne(idTema).getDeadline();
 
             if (predata - deadline > 2) {
-                valNota =  1;
-            } else {
-                valNota =  valNota - 2.5 * (predata - deadline);
+                valNota = 1;
+            } else if (predata > deadline){
+                valNota = valNota - 2.5 * (predata - deadline);
             }
             Nota nota = new Nota(new Pair(idStudent, idTema), valNota, predata, feedback);
             Nota result = notaXmlRepo.save(nota);

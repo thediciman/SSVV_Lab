@@ -1,9 +1,9 @@
 package repository;
 
 import domain.Tema;
-import validation.Validator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import validation.Validator;
 
 public class TemaXMLRepository extends AbstractXMLRepository<String, Tema> {
 

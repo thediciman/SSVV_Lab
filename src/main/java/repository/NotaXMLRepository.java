@@ -3,22 +3,12 @@ package repository;
 import domain.Nota;
 import domain.Pair;
 import domain.Student;
-import domain.Tema;
-import validation.StudentValidator;
-import validation.TemaValidator;
-import validation.ValidationException;
-import validation.Validator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import validation.StudentValidator;
+import validation.TemaValidator;
+import validation.Validator;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,7 +34,7 @@ public class NotaXMLRepository extends AbstractXMLRepository<Pair<String, String
 
     protected Nota getEntityFromNode(Element node) {
         String IDStudent = node.getAttributeNode("IDStudent").getValue();
-        String IDTema= node.getAttributeNode("IDTema").getValue();
+        String IDTema = node.getAttributeNode("IDTema").getValue();
         double nota = Double.parseDouble(node.getElementsByTagName("Nota").item(0).getTextContent());
         int saptamanaPredare = Integer.parseInt(node.getElementsByTagName("SaptamanaPredare").item(0).getTextContent());
         String feedback = node.getElementsByTagName("Feedback").item(0).getTextContent();

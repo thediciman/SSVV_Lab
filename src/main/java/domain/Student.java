@@ -14,10 +14,14 @@ public class Student implements HasID<String> {
     }
 
     @Override
-    public String getID() { return idStudent; }
+    public String getID() {
+        return idStudent;
+    }
 
     @Override
-    public void setID(String idStudent) { this.idStudent = idStudent; }
+    public void setID(String idStudent) {
+        this.idStudent = idStudent;
+    }
 
     public String getNume() {
         return nume;

@@ -16,27 +16,43 @@ public class Tema implements HasID<String> {
     }
 
     @Override
-    public String getID() { return idTema; }
+    public String getID() {
+        return idTema;
+    }
 
     @Override
-    public void setID(String idTema) { this.idTema = idTema; }
+    public void setID(String idTema) {
+        this.idTema = idTema;
+    }
 
-    public String getDescriere() { return descriere; }
+    public String getDescriere() {
+        return descriere;
+    }
 
-    public void setDescriere(String descriere) { this.descriere = descriere; }
+    public void setDescriere(String descriere) {
+        this.descriere = descriere;
+    }
 
-    public int getDeadline() { return deadline; }
+    public int getDeadline() {
+        return deadline;
+    }
 
-    public void setDeadline(int deadline) { this.deadline = deadline; }
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
+    }
 
-    public int getStartline() { return startline; }
+    public int getStartline() {
+        return startline;
+    }
 
-    public void setStartline(int startline) { this.startline = startline; }
+    public void setStartline(int startline) {
+        this.startline = startline;
+    }
 
     @Override
     public String toString() {
         return "Tema{" + "id='" + idTema + "', descriere='" + descriere + ", deadline=" + deadline +
-                ", startline=" + startline + '}';
+            ", startline=" + startline + '}';
     }
 
     @Override
@@ -48,5 +64,7 @@ public class Tema implements HasID<String> {
     }
 
     @Override
-    public int hashCode() { return Objects.hash(idTema); }
+    public int hashCode() {
+        return Objects.hash(idTema);
+    }
 }

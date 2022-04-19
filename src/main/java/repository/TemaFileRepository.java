@@ -1,9 +1,14 @@
 package repository;
 
 import domain.Tema;
-import validation.*;
+import validation.ValidationException;
+import validation.Validator;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class TemaFileRepository extends AbstractFileRepository<String, Tema> {
@@ -32,8 +37,7 @@ public class TemaFileRepository extends AbstractFileRepository<String, Tema> {
     protected void writeToFile(Tema tema) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true))) {
             bw.write(tema.getID() + "#" + tema.getDescriere() + "#" + tema.getDeadline() + "#" + tema.getStartline() + "\n");
-        }
-        catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -47,8 +51,7 @@ public class TemaFileRepository extends AbstractFileRepository<String, Tema> {
                     e.printStackTrace();
                 }
             });
-        }
-        catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

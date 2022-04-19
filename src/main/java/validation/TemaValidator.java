@@ -1,4 +1,5 @@
 package validation;
+
 import domain.Tema;
 
 public class TemaValidator implements Validator<Tema> {

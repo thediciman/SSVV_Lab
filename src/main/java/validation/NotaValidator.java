@@ -1,4 +1,5 @@
 package validation;
+
 import domain.Nota;
 
 public class NotaValidator implements Validator<Nota> {

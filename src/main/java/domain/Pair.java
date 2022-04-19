@@ -3,8 +3,8 @@ package domain;
 import java.util.Objects;
 
 public class Pair<E, F> {
-    private E object1;
-    private F object2;
+    private final E object1;
+    private final F object2;
 
     public Pair(E object1, F object2) {
         this.object1 = object1;

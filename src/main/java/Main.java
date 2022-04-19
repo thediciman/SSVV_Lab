@@ -1,10 +1,15 @@
-
-
-import console.*;
-import domain.*;
-import repository.*;
-import service.*;
-import validation.*;
+import console.UI;
+import domain.Nota;
+import domain.Student;
+import domain.Tema;
+import repository.NotaXMLRepository;
+import repository.StudentXMLRepository;
+import repository.TemaXMLRepository;
+import service.Service;
+import validation.NotaValidator;
+import validation.StudentValidator;
+import validation.TemaValidator;
+import validation.Validator;
 
 public class Main {
     public static void main(String[] args) {

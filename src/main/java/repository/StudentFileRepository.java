@@ -1,9 +1,14 @@
 package repository;
 
 import domain.Student;
-import validation.*;
+import validation.ValidationException;
+import validation.Validator;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class StudentFileRepository extends AbstractFileRepository<String, Student> {
@@ -32,8 +37,7 @@ public class StudentFileRepository extends AbstractFileRepository<String, Studen
     protected void writeToFile(Student student) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true))) {
             bw.write(student.getID() + "#" + student.getNume() + "#" + student.getGrupa() + "\n");
-        }
-        catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -47,8 +51,7 @@ public class StudentFileRepository extends AbstractFileRepository<String, Studen
                     e.printStackTrace();
                 }
             });
-        }
-        catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

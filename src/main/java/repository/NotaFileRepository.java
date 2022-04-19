@@ -1,8 +1,15 @@
 package repository;
-import domain.*;
-import validation.*;
 
-import java.io.*;
+import domain.Nota;
+import domain.Pair;
+import validation.ValidationException;
+import validation.Validator;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class NotaFileRepository extends AbstractFileRepository<Pair<String, String>, Nota> {
@@ -17,7 +24,7 @@ public class NotaFileRepository extends AbstractFileRepository<Pair<String, Stri
             buffer.lines().collect(Collectors.toList()).forEach(line -> {
                 String[] result = line.split("#");
                 Nota nota = new Nota(new Pair(result[0], result[1]), Double.parseDouble(result[2]),
-                        Integer.parseInt(result[3]), result[4]);
+                    Integer.parseInt(result[3]), result[4]);
                 try {
                     super.save(nota);
                 } catch (ValidationException ve) {
@@ -32,7 +39,7 @@ public class NotaFileRepository extends AbstractFileRepository<Pair<String, Stri
     protected void writeToFile(Nota nota) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true))) {
             bw.write(nota.getID().getObject1() + "#" + nota.getID().getObject2() + "#" + nota.getNota() + "#"
-                    + nota.getSaptamanaPredare() + "#" + nota.getFeedback() + "\n");
+                + nota.getSaptamanaPredare() + "#" + nota.getFeedback() + "\n");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -43,7 +50,7 @@ public class NotaFileRepository extends AbstractFileRepository<Pair<String, Stri
             super.entities.values().forEach(nota -> {
                 try {
                     bw.write(nota.getID().getObject1() + "#" + nota.getID().getObject2() + "#" + nota.getNota()
-                            + "#" + nota.getSaptamanaPredare() + "#" + nota.getFeedback() + "\n");
+                        + "#" + nota.getSaptamanaPredare() + "#" + nota.getFeedback() + "\n");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
