@@ -1,7 +1,7 @@
+package integration;
+
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import repository.NotaXMLRepository;
 import repository.StudentXMLRepository;
 import repository.TemaXMLRepository;
@@ -17,24 +17,23 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class TestSaveIntegration {
-
+public abstract class IntegrationAbstractTest {
     private static final String STUDENTS_FILE = "src/test/resources/integration/students.xml";
     private static final String ASSIGNMENTS_FILE = "src/test/resources/integration/assignments.xml";
     private static final String GRADES_FILE = "src/test/resources/integration/grades.xml";
 
-    private Service service;
+    protected Service service;
 
     @Before
-    public void setUp() {
+    public void setup() {
         Arrays.asList(STUDENTS_FILE, ASSIGNMENTS_FILE, GRADES_FILE).forEach(file -> {
             try {
                 Files.write(
-                    Path.of(file), Collections.singleton(
-                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
-                            "<Entitati>\n" +
-                            "</Entitati>"
-                    )
+                        Path.of(file), Collections.singleton(
+                                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+                                        "<Entitati>\n" +
+                                        "</Entitati>"
+                        )
                 );
             } catch (final IOException e) {
                 e.printStackTrace();
@@ -51,27 +50,4 @@ public class TestSaveIntegration {
     public void tearDown() {
         Arrays.asList(STUDENTS_FILE, ASSIGNMENTS_FILE, GRADES_FILE).forEach(file -> new File(file).delete());
     }
-
-    @Test
-    public void saveStudent() {
-        Assert.assertEquals(0, service.saveStudent("studentId", "name", 933));
-    }
-
-    @Test
-    public void saveAssignment() {
-        Assert.assertEquals(0, service.saveTema("assignmentId", "name", 10, 1));
-    }
-
-    @Test
-    public void saveGrade() {
-        Assert.assertEquals(-1, service.saveNota("studentId", "assignmentId", 10, 5, "feedback"));
-    }
-
-    @Test
-    public void saveStudent_saveAssignment_saveGrade() {
-        Assert.assertEquals(0, service.saveStudent("studentId", "name", 933));
-        Assert.assertEquals(0, service.saveTema("assignmentId", "name", 9, 1));
-        Assert.assertEquals(0, service.saveNota("studentId", "assignmentId", 10, 12, "feedback"));
-    }
-
 }
