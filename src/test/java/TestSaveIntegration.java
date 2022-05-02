@@ -1,9 +1,8 @@
-package integration;
-
+import integration.IntegrationAbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SaveIntegrationTest extends IntegrationAbstractTest {
+public class TestSaveIntegration extends IntegrationAbstractTest {
 
     @Test
     public void saveStudent() {
